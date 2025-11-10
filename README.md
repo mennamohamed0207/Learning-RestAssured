@@ -38,8 +38,32 @@ Validatable Interface. The implemented class of Response interface is RestAssure
       *given()
       *with()
 - The return type of both methods is RequestSpecification. There is no difference between the above two methods. The only difference is syntactical. but functionally they are equal
+- Rest Assured provides a way to set a default Request Specification so that it can be sent to each request if no other Request Specification is set.
+  ```
+  RestAssured.requestSpecification = request1;
+  ```
 
 #### RequestSpecBuilder:
 - There is another way of creating RequestSpecification in Rest Assured and that is by using class RequestSpecBuilder.
 - RequestSpecBuilder is a class in Rest Assured, which contains methods to set cookies, headers, multipart details, body, authentication, form parameters, query parameters, path parameters, base path, base URI, proxy, etc.
 - After adding all required details, we need to use “build()” method of RequestSpecBuilder class to get a RequestSpecification reference.
+
+## Defaults Rest Assured
+- By default REST assured assumes host localhost and port 8080 when doing a request. It means if we not provide any host and port, it will take default values. 
+- When a request is sent to a server, it responds with a response. The amount of time taken between sending a request to server and retrieving a response back form a server is called Response Time. this time in milliseconds by default
+- you need to use time(), getTime(), timeIn(TimeUnit timeunit), getTimeIn( TimeUnit timeunit ) from Response interface. 
+- Response interface inherits these methods from ResponseOptions. 
+- You can not use Matchers in above methods.
+- If you want to use Matchers i.e. assertion like response time is greater than a specific value, 
+you need to use overloaded **time() methods from ValidatableResponse** which inherits time() method from ValidatableResponseOptions interface.
+- This interface contains four methods :-
+     1. getTime() – The response time in milliseconds (or -1 if no response time could be measured)
+     2. getTimeIn(TimeUnit timeunit) – The response time in the given time unit (or -1 if no response time could be measured)
+     3. time() – The response time in milliseconds (or -1 if no response time could be measured)
+     4. timeIn( TimeUnit timeunit ) – The response time in the given time unit (or -1 if no response time could be measured)
+- Technically, getTime() and time() both are same and getTimeIn() and timeIn() both are same. Difference is Syntactic sugar.
+- Interface ValidatableResponseOptions :-
+  This interface has overloaded time() methods which accepts Matcher.
+    
+  1. time(Matcher matcher) – Validate that the response time (in milliseconds) matches the supplied matcher.
+  2. time(Matcher macther, TimeUnit timeunit) – Validate that the response time matches the supplied matcher and time unit.

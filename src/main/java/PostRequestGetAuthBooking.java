@@ -7,6 +7,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 public class PostRequestGetAuthBooking {
     /*
     *
@@ -50,5 +52,11 @@ public class PostRequestGetAuthBooking {
                 .then()
                 .assertThat()
                 .body("token", Matchers.notNullValue());
+    }
+    //XML is the same as json file but change content type to ContentType.XML
+    @Test
+    public void getJsonDataFromFile() {
+        File jsonFile = new File("E:\\Material_For_Interviews\\RestAssured\\Learning-RestAssured\\RestAssuredLearning\\src\\main\\resources\\data.json");
+        RestAssured.given().baseUri("https://restful-booker.herokuapp.com/auth").contentType(ContentType.JSON).body(jsonFile).when().post().then().log().all();
     }
 }
