@@ -18,7 +18,7 @@ public class PostRequestGetAuthBooking {
     String jsonString = "{\"username\" : \"admin\",\"password\" : \"password123\"}";
 
     @Test
-    public void postAuth_NonBDD() {
+    public String postAuth_NonBDD() {
         /*
         We can pass body as a String or a JSON file or a XML file or a Java Object or a byte array.
          * */
@@ -36,6 +36,8 @@ public class PostRequestGetAuthBooking {
         validatableResponse.statusCode(200);
         validatableResponse.body("token", Matchers.notNullValue());
         validatableResponse.body("token.length()", Matchers.is(15));
+        String token = response.jsonPath().getString("token");
+        return token;
 
 
     }
