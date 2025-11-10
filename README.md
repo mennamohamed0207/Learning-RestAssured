@@ -30,3 +30,16 @@ Validatable Interface. The implemented class of Response interface is RestAssure
 - Given() : to set up the request
 - When() : technically it has no user
 - Then() : to return validatable response
+### Request Specification:
+- DRY principle
+- RequestSpecification is an interface that allows you to specify how the request will look like.
+- This interface has readymade methods to define base URL, base path, headers, etc. We need to use given() method of RestAssured class to get a reference for RequestSpecification. 
+- There are two methods in RestAssured class to start creating Request specifications:-
+      *given()
+      *with()
+- The return type of both methods is RequestSpecification. There is no difference between the above two methods. The only difference is syntactical. but functionally they are equal
+
+#### RequestSpecBuilder:
+- There is another way of creating RequestSpecification in Rest Assured and that is by using class RequestSpecBuilder.
+- RequestSpecBuilder is a class in Rest Assured, which contains methods to set cookies, headers, multipart details, body, authentication, form parameters, query parameters, path parameters, base path, base URI, proxy, etc.
+- After adding all required details, we need to use “build()” method of RequestSpecBuilder class to get a RequestSpecification reference.

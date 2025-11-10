@@ -1,4 +1,5 @@
 
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
@@ -63,6 +64,28 @@ public class GetAllBookings {
                 .get("/booking")
                 .then()
                 .statusCode(200);
+    }
+    @Test
+    public void requestSpecificationsExamples()
+    {
+        RequestSpecification requestSpecification =
+                RestAssured.given()
+                        .baseUri("https://restful-booker.herokuapp.com")
+                        .basePath("/booking");
+
+//        RestAssured.given(requestSpecification);
+//        OR
+//        RestAssured.given().spec(requestSpecification);
+
+        RequestSpecBuilder reqBuild=new RequestSpecBuilder();
+        reqBuild.setBaseUri("https://restful-booker.herokuapp.com");
+        reqBuild.setBasePath("/booking");
+        RequestSpecification reqSpec = reqBuild.build();
+
+        Response res1= reqSpec.get();
+        System.out.println(res1.asString());
+        System.out.println("======================");
+
     }
 
 }
