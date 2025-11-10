@@ -38,4 +38,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-./src/java/DMS
+ src/main/java/DMS
